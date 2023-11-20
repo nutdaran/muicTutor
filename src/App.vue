@@ -6,8 +6,8 @@ import { RouterView } from 'vue-router'
 <template>
   <v-toolbar color="#522a80">
     <v-toolbar-side-icon>
-    <v-img src="/src/assets/NongBuii.png" height="50px" width="50px"></v-img>
-  </v-toolbar-side-icon>
+      <v-img src="/src/assets/NongBuii.png" height="50px" width="50px"></v-img>
+    </v-toolbar-side-icon>
     <v-toolbar-title  id="title">MUIC Tutor</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-toolbar-items>
@@ -24,12 +24,13 @@ import { RouterView } from 'vue-router'
 
 <style scoped>
 header {
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
 body {
   margin: 3rem;
 }
+
 #title {
   font-family: "Rubik-Bold";
   font-size: 30px;
