@@ -1,9 +1,13 @@
-<script></script>
+<script setup>
+import NavBar from '../components/NavBar.vue'
+</script>
 
 <template>
-    <main>
-        <h1>Tutor Details</h1>
-    </main>
+    <NavBar />
+    <div>
+        <main>
+            <h1>Tutor Details</h1>
+        </main>
+    </div>
 </template>
-
 <style></style>
