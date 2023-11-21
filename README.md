@@ -13,6 +13,9 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 ## Project Setup
 
 ```sh
+npm install firebase
+npm i vuetify
+npm install vuetify@next @mdi/font
 npm install
 ```
 
