@@ -1,9 +1,10 @@
 <script setup>
 import { RouterView } from 'vue-router'
-// import HelloWorld from './components/HelloWorld.vue'
+import NavBar from '@/components/NavBar.vue'
 </script>
 
 <template>
+  <NavBar />
   <RouterView />
 </template>
 
@@ -12,9 +13,12 @@ header {
   padding: 0.5rem;
 }
 
-body {
-  margin: 3rem;
-}
+main {
+    margin-top: 3rem;
+    margin-left: 8rem;
+    margin-right: 8rem;
+    margin-bottom: 3rem;
+    }
 
 #title {
   font-family: "Rubik-Bold";

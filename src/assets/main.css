@@ -2,6 +2,17 @@ h1 {
   font-family: 'RubikBold';
 }
 
+h2 {
+  font-family: 'RubikBold';
+}
+
+h3 {
+  font-family: 'RubikBold';
+}
+
+p {
+  font-family: 'Rubik';
+}
 
 @font-face {
   font-family: 'RubikBold';

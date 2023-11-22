@@ -1,5 +1,4 @@
 <template>
-  <NavBar />
   <ImageSlider />
   <div>
     <main>
@@ -15,5 +14,4 @@
 <script setup>
 import ImageSlider from '../components/ImageSlider.vue';
 import { RouterLink } from 'vue-router'
-import NavBar from '../components/NavBar.vue'
 </script>
