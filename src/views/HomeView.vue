@@ -15,3 +15,12 @@
 import ImageSlider from '../components/ImageSlider.vue';
 import { RouterLink } from 'vue-router'
 </script>
+
+<style>
+  main {
+      margin-top: 3rem;
+      margin-left: 8rem;
+      margin-right: 8rem;
+      margin-bottom: 3rem;
+    }
+</style>

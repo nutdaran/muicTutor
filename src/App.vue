@@ -18,7 +18,7 @@ main {
     margin-left: 8rem;
     margin-right: 8rem;
     margin-bottom: 3rem;
-    }
+  }
 
 #title {
   font-family: "Rubik-Bold";
