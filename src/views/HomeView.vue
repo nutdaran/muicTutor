@@ -7,6 +7,9 @@
       <RouterLink to="/tutor">
         <button style="color: black;">Go to Tutor Details</button>
       </RouterLink>
+      <RouterLink to="/course">
+        <button style="color: black;">Go to Course Details</button>
+      </RouterLink>
     </main>
   </div>
 </template>

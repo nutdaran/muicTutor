@@ -56,7 +56,7 @@
                 studentList:['A','B','C']
                 },
                 {
-                courseID: '003',
+                courseID: '005',
                 courseName: 'PCSA',
                 tutor: "Ped",
                 time: "Wed 2pm-4pm",
@@ -76,7 +76,7 @@
                 studentList:['A','B','C']
                 },
                 {
-                courseID: '003',
+                courseID: '006',
                 courseName: 'PCSA',
                 tutor: "Ped",
                 time: "Wed 2pm-4pm",
@@ -86,13 +86,13 @@
                 studentList:['A','B','C']
                 },
                 {
-                courseID: '003',
+                courseID: '007',
                 courseName: 'PCSA',
                 tutor: "Ped",
                 time: "Wed 2pm-4pm",
                 rate: 300,
                 capacity: 10,
-                enrolled: 3,
+                enrolled: 9,
                 studentList:['A','B','C']
                 },
             ]
@@ -101,10 +101,12 @@
             enrollCourse(courseId) {
                 const updatedCourse = this.courses.find(course => course.courseID === courseId);
                 updatedCourse.studentList.push("F");
+                updatedCourse.enrolled+=1;
                 alert("Added Course");
             },
             leaveCourse(courseId) {
                 const updatedCourse = this.courses.find(course => course.courseID === courseId);
+                updatedCourse.enrolled-=1;
                 updatedCourse.studentList.pop(); //need to remove that username
                 alert("Removed Course");
             }

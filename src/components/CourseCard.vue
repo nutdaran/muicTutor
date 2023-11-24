@@ -38,7 +38,7 @@ import { computed } from 'vue';
       </v-btn>
     </div>
     <!-- Full -->
-    <div class="button-container" v-show="course.course.enrolled==course.course.capacity">
+    <div class="button-container" v-show="course.course.enrolled==course.course.capacity && !checkName">
       <v-btn id="button-full" block :disabled="course.course.enrolled==course.course.capacity">
         Full
       </v-btn>
