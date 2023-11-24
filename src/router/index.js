@@ -18,8 +18,9 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue')
     },
     {
-      path: '/tutor',
+      path: '/tutor/001',
       name: 'tutor',
+      // props:true,
       component: () => import('../views/TutorDetailsView.vue')
     },
     {

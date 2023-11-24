@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue';
+import { RouterLink } from 'vue-router';
 
 // import { defineEmits } from 'vue'
     const course  = defineProps({
@@ -18,8 +19,15 @@ import { computed } from 'vue';
 <template>
   <v-card class="card">
     <div class="card-content">
-      <h3>{{ course.course.courseName }}</h3>
-      <p><strong>Tutor:</strong> {{ course.course.tutor }}</p>
+      <h3>
+        <RouterLink style="text-decoration: none; color: inherit" :to="{ name: 'course' }">
+        {{ course.course.courseName }}
+        </RouterLink>
+      </h3>
+      <p><strong>Tutor: </strong>
+        <RouterLink style="text-decoration: none; color: inherit" :to="{ name: 'tutor' }">
+          {{ course.course.tutor }}
+          </RouterLink></p>
       <p><strong>Time:</strong> {{ course.course.time }}</p>
       <p><strong>Cost:</strong> {{ course.course.rate }}</p>
       <p><strong>Seat Available:</strong> {{ course.course.enrolled }}/{{ course.course.capacity }} </p>

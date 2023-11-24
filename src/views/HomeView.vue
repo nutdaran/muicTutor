@@ -4,7 +4,7 @@
     <main>
       <h1>Home</h1>
       <v-icon>mdi-home</v-icon>
-      <RouterLink to="/tutor">
+      <RouterLink to="tutor/001">
         <button style="color: black;">Go to Tutor Details</button>
       </RouterLink>
       <RouterLink to="/course">
