@@ -4,11 +4,8 @@
     <main>
       <h1>Home</h1>
       <v-icon>mdi-home</v-icon>
-      <RouterLink to="tutor/001">
-        <button style="color: black;">Go to Tutor Details</button>
-      </RouterLink>
-      <RouterLink to="/course">
-        <button style="color: black;">Go to Course Details</button>
+      <RouterLink :to="{ name: 'course', params: { id: 'PCSA' } }">
+        <button style="color: black;">Go to PCSA Course Details</button>
       </RouterLink>
     </main>
   </div>

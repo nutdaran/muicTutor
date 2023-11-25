@@ -18,17 +18,27 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue')
     },
     {
-      path: '/tutor/001',
+      path: '/tutor/:id',
       name: 'tutor',
-      // props:true,
+      props:true,
       component: () => import('../views/TutorDetailsView.vue')
     },
     {
-      path: '/course',
+      path: '/course/:id',
       name: 'course',
+      props: true,
+      // props:(route) => ({
+      //   id: formatId(route.params.id)
+      // }),
       component: () => import('../views/CourseView.vue')
     }
   ]
 })
+
+// function formatId(id) {
+//   // Your formatting logic here
+//   // For example, you can capitalize the id
+//   return id.toLowerCase();
+// }
 
 export default router
