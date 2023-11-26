@@ -39,63 +39,75 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="image-slider-container" @mouseover="showButtons" @mouseout="hideButtons">
-        <div class="slider-container" :style="{ transform: `translateX(${currentIndex * -100}%)` }">
+  <div class="wrapper" @mouseover="showButtons" @mouseout="hideButtons">
+    <div class="image-slider-container">
+      <div class="slider-container" :style="{ transform: `translateX(${currentIndex * -100}%)` }">
         <div v-for="(image, index) in images" :key="index" class="slide">
-            <img :src="image" alt="Slide" />
+          <img :src="image" alt="Slide"/>
         </div>
-        </div>
+      </div>
+    </div>
     <v-icon v-show="showLeftButton" class="nav-icon left" @click="prevSlide">mdi-chevron-left</v-icon>
     <v-icon v-show="showRightButton" class="nav-icon right" @click="nextSlide">mdi-chevron-right</v-icon>
-  </div>
-  <div class="radio-buttons">
+    <div class="radio-buttons">
       <label v-for="(image, index) in images" :key="index" :class="{ 'selected': currentIndex === index }">
         <input type="radio" v-model="currentIndex" :value="index" />
         <span class="indicator"></span>
       </label>
     </div>
+  </div>
 </template>
 
 <style scoped>
+.wrapper {
+  position: relative;
+  /* padding-top: 56.25%;  */
+  height: 70vh;
+}
+
+.image-slider-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 70vh;
+}
 
 .slider-container {
   display: flex;
   transition: transform 0.5s ease;
+
 }
 
 .slide {
   flex: 0 0 100%;
+  /* height: 40% */
 }
 
-img {
+.slide img {
   width: 100%;
-  height: 700px;
+  height: 70vh;
+  /* object-fit: cover; Maintain aspect ratio while covering the container */
 }
-
-
 .nav-icon {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
   font-size: 24px;
   cursor: pointer;
   color: white;
   transition: opacity 0.3s ease; /* Add a fade effect to the buttons */
+  background-color: black;
 }
 
 .left {
   left: 20px;
-  color: black;
+  color: white;
 }
 
 .right {
   right: 20px;
-  color: black;
-}
-
-/* Hide buttons by default */
-.nav-icon {
-  opacity: 0;
+  color: white;
 }
 
 /* Show buttons on hover */
@@ -105,7 +117,7 @@ img {
 
 .radio-buttons {
   position: absolute;
-  bottom: 20%;
+  bottom: 3%;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -114,7 +126,6 @@ img {
   border-radius: 20px;
   opacity: 0.4;
   z-index: 1; /* Ensure the radio buttons appear above the image */
-
 }
 
 .radio-buttons label {
@@ -148,5 +159,26 @@ img {
 
 .selected .indicator {
   background-color: rgba(255, 255, 255, 1); /* Adjust selected transparency */
+}
+
+/* Media queries for adjusting positions on specific screen sizes */
+@media (max-width: 600px) {
+  .nav-icon {
+    font-size: 18px;
+  }
+
+  .radio-buttons {
+    bottom: 3%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .nav-icon {
+    font-size: 30px;
+  }
+
+  .radio-buttons {
+    bottom: 3%;
+  }
 }
 </style>
