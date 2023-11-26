@@ -63,6 +63,10 @@ onMounted(() => {
   position: relative;
   /* padding-top: 56.25%;  */
   height: 70vh;
+  background-image: url('../assets/images/mahidol.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .image-slider-container {
@@ -72,21 +76,23 @@ onMounted(() => {
   right: 0;
   bottom: 0;
   height: 70vh;
+  align-items: center;
 }
 
 .slider-container {
   display: flex;
   transition: transform 0.5s ease;
-
 }
 
 .slide {
   flex: 0 0 100%;
+  display: flex;
+  justify-content: center;
   /* height: 40% */
 }
 
 .slide img {
-  width: 100%;
+  /* width: 100%; */
   height: 70vh;
   /* object-fit: cover; Maintain aspect ratio while covering the container */
 }
