@@ -31,6 +31,11 @@ const router = createRouter({
       //   id: formatId(route.params.id)
       // }),
       component: () => import('../views/CourseView.vue')
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('../views/LoginView.vue')
     }
   ]
 })

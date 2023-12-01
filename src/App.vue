@@ -20,15 +20,4 @@ main {
     margin-bottom: 3rem;
   }
 
-#title {
-  font-family: "Rubik-Bold";
-  font-size: 30px;
-  color: white;
-}
-#text {
-  font-family: "Rubik-Regular";
-  font-size: 14px;
-  color: white;
-}
-
 </style>
