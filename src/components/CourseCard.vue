@@ -74,13 +74,13 @@ import { doc, updateDoc, arrayUnion, increment, arrayRemove, getDoc } from 'fire
     <!-- Enroll Button type -->
     <!-- Normal  -->
     <div class="button-container" v-show="!checkName && course.course.enrolled!=course.course.capacity" @click="enrollCourse(course.course.id)">
-      <v-btn id="button-enroll" block flat prepend-icon="mdi-plus-circle-outline">
+      <v-btn id="main-button" block flat prepend-icon="mdi-plus-circle-outline">
         Enroll
       </v-btn>
     </div>
     <!-- Enrolled -->
     <div class="button-container" v-show="checkName" @click="leaveCourse(course.course.id)">
-      <v-btn id="button-enrolled" block flat prepend-icon="mdi-check">
+      <v-btn id="clicked-button" block flat prepend-icon="mdi-check">
         Enrolled
       </v-btn>
     </div>
@@ -117,21 +117,4 @@ import { doc, updateDoc, arrayUnion, increment, arrayRemove, getDoc } from 'fire
     margin-top: auto; 
   }
 
-  #button-enroll {
-    background-color: #522a80;
-    color: white;
-    font-family: "Rubik-Regular";
-    font-size: 14px;
-    border-radius: 6px;
-    margin-top: auto; 
-  }
-
-  #button-enrolled {
-    background-color: #8c71a8;
-    color: white;
-    font-family: "Rubik-Regular";
-    font-size: 14px;
-    border-radius: 6px;
-    margin-top: auto; 
-  }
 </style>

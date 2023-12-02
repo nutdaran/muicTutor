@@ -23,3 +23,21 @@ p {
   font-family: 'Rubik';
   src: url(./fonts/Rubik-Regular.ttf);
 }
+
+#main-button {
+  background-color: #522a80;
+  color: white;
+  font-family: "Rubik-Regular";
+  font-size: 14px;
+  border-radius: 6px;
+  margin-top: auto; 
+}
+
+#clicked-button {
+  background-color: #8c71a8;
+  color: white;
+  font-family: "Rubik-Regular";
+  font-size: 14px;
+  border-radius: 6px;
+  margin-top: auto; 
+}
