@@ -1,46 +1,50 @@
 <script setup>
 
 import {ref} from 'vue'
-// import { auth } from '@/js/firebase'
-// import { signInWithEmailAndPassword } from 'firebase/auth'
-// import router from '@/router/index.js'
+import { auth } from '@/firebase/firebase'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import router from '@/router/index.js'
 
 const email = ref(null)
 const password = ref(null)
+const alert = ref(false)
 
-// function login () {
-//     console.log("Login : " + email.value + " : " + password.value);
+function login () {
+    console.log("Login : " + email.value + " : " + password.value);
 
-// signInWithEmailAndPassword(auth, email.value, password.value)
-// .then((userCredential) => {
-//             const user = userCredential.user;
-//             console.log(user)
-//             console.log(userCredential)
-//             router.push('/books')
-//         })
-//         .catch((error) => {
-//             const errorCode = error.code;
-//             const errorMessage = error.message;
-//             console.log("Error Code: " + errorCode)
-//             console.log("Error Message: " + errorMessage)
-//         });
+signInWithEmailAndPassword(auth, email.value, password.value)
+.then((userCredential) => {
+            const user = userCredential.user;
+            console.log(user)
+            console.log(userCredential)
+            router.push('/')
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log("Error Code: " + errorCode)
+            console.log("Error Message: " + errorMessage)
+            alert.value = true
+        });
 
-// }
+}
 </script>
 
 <template>
+    <!-- <v-alert class="alert" v-if="alert" color="error" icon="$error" title="Invalid email/password"></v-alert> -->
     <div class="login-page">
+        <v-alert class="alert-bar" v-if="alert" color="error" icon="$error" title="Invalid email/password"></v-alert>
         <div cladd="login">
             <v-card class="pa-5 elevation-2">
                 <h2 class="pb-2">Login to Your Account</h2>
-                <form>
+                <form @submit.prevent="login">
                     <div class="form">
                         <label >Email</label>
-                        <input v-model="email" id="email" type="text" />
+                        <input v-model="email" id="email" type="text" required/>
                     </div>
                     <div class="form">
                         <label for="password">Password</label>
-                        <input v-model="password" id="password" type="password" />
+                        <input v-model="password" id="password" type="password" required/>
                     </div>
                     <div class="form pt-3">
                         <v-btn type="submit" id="main-button">Log in</v-btn>
@@ -53,7 +57,7 @@ const password = ref(null)
         <h2 id="register-text">New here?</h2>
         <p id="register-text">Be our member today!</p>
         <RouterLink to="/register">
-            <v-btn class="register-button" style="font-family: 'Rubik-Regular';">Register</v-btn>
+            <v-btn class="register-button">Register</v-btn>
         </RouterLink>
         </v-card>
     </div>
@@ -67,6 +71,7 @@ const password = ref(null)
     .register-button {
         border-radius: 20px;
         box-shadow: 2px 2px 6px 4px rgba(0, 0, 0, 0.2);
+        font-family: 'Rubik-Regular';
     }
     .register {
         padding: 20px;
@@ -99,6 +104,11 @@ const password = ref(null)
         display: flex;
         flex-direction: column;
         margin-bottom: 1rem;
+    }
+    .alert-bar {
+        z-index: 1;
+        position: absolute;
+        top: 10%;
     }
     
     input {

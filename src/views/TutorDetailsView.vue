@@ -58,7 +58,6 @@
                 <div id="section">
                     <p id="head"><strong>Bio</strong></p>
                     <p v-html="formatBio"></p>
-                    <!-- <p>{{tutor.bio}}</p> -->
                 </div>
                 <p id="head"><strong>Contact</strong></p>
                 <div style="display:flex">

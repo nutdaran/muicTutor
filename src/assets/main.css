@@ -27,7 +27,7 @@ p {
 #main-button {
   background-color: #522a80;
   color: white;
-  font-family: "Rubik-Regular";
+  font-family: "Rubik";
   font-size: 14px;
   border-radius: 6px;
   margin-top: auto; 
@@ -36,7 +36,7 @@ p {
 #clicked-button {
   background-color: #8c71a8;
   color: white;
-  font-family: "Rubik-Regular";
+  font-family: "Rubik";
   font-size: 14px;
   border-radius: 6px;
   margin-top: auto; 
