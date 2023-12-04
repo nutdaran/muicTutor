@@ -33,7 +33,7 @@ signInWithEmailAndPassword(auth, email.value, password.value)
 <template>
     <!-- <v-alert class="alert" v-if="alert" color="error" icon="$error" title="Invalid email/password"></v-alert> -->
     <div class="login-page">
-        <v-alert class="alert-bar" v-if="alert" color="error" icon="$error" title="Invalid email/password"></v-alert>
+        <v-alert class="alert-bar" v-if="alert" color="error" icon="$error" text="Invalid email/password"></v-alert>
         <div>
             <v-card class="pa-5 elevation-2">
                 <h2 class="pb-2">Login to Your Account</h2>
@@ -101,7 +101,7 @@ signInWithEmailAndPassword(auth, email.value, password.value)
     .alert-bar {
         z-index: 1;
         position: absolute;
-        top: 10%;
+        top: 15%;
     }
     
     input {
