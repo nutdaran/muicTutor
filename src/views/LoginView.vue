@@ -34,17 +34,17 @@ signInWithEmailAndPassword(auth, email.value, password.value)
     <!-- <v-alert class="alert" v-if="alert" color="error" icon="$error" title="Invalid email/password"></v-alert> -->
     <div class="login-page">
         <v-alert class="alert-bar" v-if="alert" color="error" icon="$error" title="Invalid email/password"></v-alert>
-        <div cladd="login">
+        <div>
             <v-card class="pa-5 elevation-2">
                 <h2 class="pb-2">Login to Your Account</h2>
                 <form @submit.prevent="login">
                     <div class="form">
                         <label >Email</label>
-                        <input v-model="email" id="email" type="text" required/>
+                        <input v-model="email" type="text" required/>
                     </div>
                     <div class="form">
                         <label for="password">Password</label>
-                        <input v-model="password" id="password" type="password" required/>
+                        <input v-model="password" type="password" required/>
                     </div>
                     <div class="form pt-3">
                         <v-btn type="submit" id="main-button">Log in</v-btn>
@@ -83,13 +83,6 @@ signInWithEmailAndPassword(auth, email.value, password.value)
         flex-direction: column;
         justify-content: center;
         align-items: center;
-    }
-    .login {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
     }
     .login-page {
         display: flex;
