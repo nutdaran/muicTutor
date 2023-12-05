@@ -16,6 +16,7 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 npm install firebase
 npm i vuetify
 npm install vuetify@next @mdi/font
+npm install vue-number-animation
 npm install
 ```
 
