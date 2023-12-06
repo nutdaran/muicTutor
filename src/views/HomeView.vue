@@ -1,7 +1,6 @@
 <template>
   <ImageSlider />
   <div>
-    <main>
       <div class = "factbox">
         
         <div class = "infono">
@@ -29,8 +28,7 @@
           autoplay
             easing="linear"
           /> <br/>
-          Active <br />
-          tutors
+          Active tutors
         </div>
 
         <div class = "infono">
@@ -49,17 +47,17 @@
         
       </div>
       <!-- <v-icon>mdi-home</v-icon>  -->
-
+      <main>
       <div class = "foo">
-        <h1>Subject Offerings</h1> 
-        Hello there! Welcome to MUIC Tutor. We are here to help you with your studies.
-        Here are the subjects that our tutors can help you with:
+        <h2>Subject Offerings</h2> 
+        <p>Hello there! Welcome to MUIC Tutor. We are here to help you with your studies.<br/>
+        Here are the subjects that our tutors can help you with:</p>
       </div>
 
       <div class="subjects">
         <SubjectCard v-for="subject in subjects" :key="subject" :subject="subject" />
       </div>
-
+    </main>
       <div class="welcomebox">
         <div class="img1"><img :src="t4" alt=""></div>
         <div class = "hellotxt">
@@ -67,7 +65,6 @@
         </div>
       </div>
       
-    </main>
   </div>
 </template>
 
@@ -134,39 +131,44 @@ onMounted(async () => {
 
 <style>
   main {
-      /* margin-top: 3rem;
+      margin-top: 3rem;
       margin-left: 8rem;
       margin-right: 8rem;
       margin-bottom: 3rem;
-      border: 10px solid red; */
+      /* border: 10px solid red; */
     }
     
   .factbox {
     position: relative;
-    height: 70vh;
-    width: 100vw;
-    background-color: #F8F8F8;
+    height: 60vh;
+    /* width: ; */
+    background-color: #eaeaea;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
   }  
 
   .infono {
-    /* border: 1px solid black; */
     border-radius: 2rem;
-    padding-top: 2rem;
-    height: 90%;
-    width: 32%;
+    box-shadow: 0px 6px 6px 4px rgba(0, 0, 0, 0.1);
+    margin: 2rem;
+    height:60%;
+    width: 15%;
     background-color: white;
-    font-size: 5.5rem;
+    font-size: 20px;
+    font-family: 'Rubik-Regular';
     text-align: center;
-    font-weight: lighter; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     color: grey;
+
   }
 
   #num1 {
-    font-size: 8rem;
+    font-size: 64px;
     font-weight: bold;
     text-align: center;
     color: #522a80;
@@ -197,7 +199,7 @@ onMounted(async () => {
    
   .hellotxt {
     margin-right: 3rem;
-    font-size: 2rem;
+    font-size: 30px;
     color: white;
     text-align: right;
     /* border: 5px solid; */
