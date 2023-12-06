@@ -31,7 +31,7 @@
     <main>
         <div class="course">
             <h2>Course</h2>
-            <h1>PCSA</h1>
+            <h1>{{props.id}}</h1>
         </div>
         <div class="d-flex flex-wrap ga-7" id="card"> 
             <CourseCard

@@ -7,7 +7,7 @@
     const name = ref(null)
     const email = ref(null)
     const password = ref(null)
-    const role = ref(null)
+    // const role = ref(null)
     const alert = ref(false)
 
     function onSubmit() {
@@ -20,9 +20,19 @@
             {
                 username: name.value,
                 email: email.value,
-                tutor: role.value,
+                // tutor: role.value,
                 course: {}
             });
+
+            // if(role.value == true) {
+            //     await setDoc(doc(db,"tutors",user.uid), 
+            //     {
+            //         username: name.value,
+            //         email: email.value,
+            //         tutor: role.value,
+            //         course: {}
+            //     });
+            // }
             console.log(user)
             console.log(userCredential)
             alert.value = true
@@ -70,13 +80,13 @@
                 required
                 />
             </div>
-            <div>
+            <!-- <div>
                 <p>Select your role:</p>
                 <v-radio-group color="purple-darken-3" v-model="role" required>
                     <v-radio label="Student" value="False"></v-radio>
                     <v-radio label="Tutor" value="True"></v-radio>
                 </v-radio-group>
-            </div>
+            </div> -->
             <v-btn type="submit" id="main-button">Submit</v-btn>
             </form>
         </v-card>
