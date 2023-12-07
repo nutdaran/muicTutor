@@ -1,48 +1,63 @@
-<script>
-  import { auth } from '@/firebase/firebase'
-  import { ref,onMounted } from 'vue'
-  // import { getDoc, doc } from 'firebase/firestore'
+<script setup>
+  import { auth, db } from '@/firebase/firebase'
+  import { onMounted, ref } from 'vue'
+  import { getDoc, doc } from 'firebase/firestore'
 
-  const currentUser = ref(null)
-  // const userDetail = ref({})
+  const currentUser = auth.currentUser
+  const userDetail = ref({})
 
-  // const getUserDetail = async () => {
-  //     const snapshot = await getDoc(doc(db,"users",auth.currentUser))
-  //     if (snapshot.exists()) {
-  //         userDetail.value = snapshot.data()
-  //     } else {
-  //         console.log('Can not find this user')
-  //     }
-  // }
-
-  onMounted(() => {
-    currentUser.value = auth.currentUser
-    if (currentUser.value != null) {
-      console.log("Current user is: " + currentUser.value.uid)
+  const getUserDetail = async () => {
+      if(currentUser != null) {
+        const snapshot = await getDoc(doc(db,"users",currentUser.uid))
+        if (snapshot.exists()) {
+            userDetail.value = snapshot.data()
+            // console.log(userDetail.value.username)
+        } else {
+            console.log('Can not find this user')
+        }
     }
-    // auth.onAuthStateChanged((user) => {
-    //   if (user) {
-    //     currentUser.value = user
-    //   } else {
-    //     currentUser.value = null
-    //   }
-    // })
+  }
+
+  onMounted(async () => {
+    // currentUser.value = auth.currentUser
+    if (currentUser != null) {
+      console.log("Current user is here" )
+      // console.log(currentUser)
+    } else {
+      console.log("No user is logged in!")
+    }
+    await getUserDetail()
   })
+
+  const logout = () => {
+    auth.signOut()
+    console.log("User has logged out")
+    window.location.reload()
+  }
+
 </script>
 
 <template>
     <v-toolbar color="#522a80">
-      <v-toolbar-side-icon>
+      <div class="home-icon">
         <v-img src="/src/assets/NongBuii.png" height="50px" width="50px" class="mx-3"></v-img>
-      </v-toolbar-side-icon>
       <RouterLink to="/" style="text-decoration: none; color: inherit">
       <v-toolbar-title id="title">MUIC Tutor</v-toolbar-title>
     </RouterLink>
+    </div>
     <v-spacer></v-spacer>
     <v-toolbar-items>
         <v-btn id="text-button" to="/">Home</v-btn>
         <v-btn id="text-button" to="/about">About</v-btn>
-        <v-btn variant="outlined" prepend-icon="mdi-account-school" id="text-button" to="/login">Log In</v-btn>
+        <v-btn id="text-button" to="/login" v-show="currentUser==null" variant="outlined" prepend-icon="mdi-account-school">Log In</v-btn>
+        <v-btn id="text-buttn" v-show="currentUser!=null">Hi, {{ userDetail.username }}
+          <v-menu activator="parent">
+            <v-list>
+              <v-list-item to="/dashboard">Dashboard</v-list-item>
+              <v-list-item id="logout-btn" @click="logout">Log out</v-list-item>
+            </v-list>
+          </v-menu>
+        </v-btn>
       </v-toolbar-items>
   </v-toolbar>
 </template>
@@ -58,5 +73,16 @@
     font-size: 14px;
     color: white;
     border-radius: 12px;
+  }
+  #logout-btn {
+    font-family: "Rubik-Regular";
+    font-size: 16px;
+    color: red;
+    border-radius: 12px;
+  }
+  .home-icon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
   }
 </style>

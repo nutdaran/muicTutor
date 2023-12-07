@@ -1,10 +1,22 @@
 <script setup>
 import { RouterView } from 'vue-router'
-import NavBar from '@/components/NavBar.vue'
+// import NavBar from '@/components/NavBar.vue'
+// import { auth } from '@/firebase/firebase.js'
+// import { onMounted } from 'vue';
+
+// const currentUser = auth.currentUser
+
+// onMounted(() => {
+//   if (currentUser==null){
+//       console.log("No user is logged in")
+//     } else {
+//       console.log("Current user is: " + currentUser.email)
+//     }
+// });
 </script>
 
 <template>
-  <NavBar />
+  <!-- <NavBar/> -->
   <RouterView />
 </template>
 

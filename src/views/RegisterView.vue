@@ -3,6 +3,8 @@
     import { auth, db } from '@/firebase/firebase'
     import { createUserWithEmailAndPassword } from 'firebase/auth'
     import { doc, setDoc } from 'firebase/firestore';
+    import NavBar from '@/components/NavBar.vue'
+
 
     const name = ref(null)
     const email = ref(null)
@@ -47,14 +49,15 @@
 </script>
 
 <template>
+    <NavBar/>
     <div class="register-page">
         <v-alert class="alert-bar" v-if="alert" color="success" icon="$success" text="Successfully registered"></v-alert>
         <div class="register-box">
         <v-card class="pa-5 elevation-2">
             <h2>Register</h2>
-            <form @submit.prevent="onSubmit">
+            <form @submit.prevent="onSubmit" id="register-form">
             <div class="form">
-                <label for="name">Name</label>
+                <p>Name</p>
                 <input
                 id="name"
                 type="text"
@@ -63,7 +66,7 @@
                 />
             </div>
             <div class="form">
-                <label for="email">Email</label>
+                <p>Email</p>
                 <input
                 id="email"
                 type="email"
@@ -72,7 +75,7 @@
                 />
             </div>
             <div class="form">
-                <label for="password">Password</label>
+                <p>Password</p>
                 <input
                 id="password"
                 type="password"

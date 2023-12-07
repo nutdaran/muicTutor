@@ -1,49 +1,49 @@
 <script setup>
 
-import {ref} from 'vue'
-import { auth } from '@/firebase/firebase'
-import { signInWithEmailAndPassword } from 'firebase/auth'
-import router from '@/router/index.js'
+    import { ref } from 'vue'
+    import { auth } from '@/firebase/firebase'
+    import { signInWithEmailAndPassword } from 'firebase/auth'
+    import router from '@/router/index.js'
+    import NavBar from '@/components/NavBar.vue'
 
-const email = ref(null)
-const password = ref(null)
-const alert = ref(false)
 
-function login () {
-    console.log("Login : " + email.value + " : " + password.value);
+    const email = ref(null)
+    const password = ref(null)
+    const alert = ref(false)
 
-signInWithEmailAndPassword(auth, email.value, password.value)
-.then((userCredential) => {
-            const user = userCredential.user;
-            console.log(user)
-            console.log(userCredential)
-            router.push('/')
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log("Error Code: " + errorCode)
-            console.log("Error Message: " + errorMessage)
-            alert.value = true
-        });
-
-}
+    function login () {
+    signInWithEmailAndPassword(auth, email.value, password.value)
+    .then((userCredential) => {
+                const user = userCredential.user;
+                console.log(user)
+                // console.log(userCredential)
+                router.push('/')
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log("Error Code: " + errorCode)
+                console.log("Error Message: " + errorMessage)
+                alert.value = true
+            });
+    }
 </script>
 
 <template>
+    <NavBar/>
     <!-- <v-alert class="alert" v-if="alert" color="error" icon="$error" title="Invalid email/password"></v-alert> -->
     <div class="login-page">
         <v-alert class="alert-bar" v-if="alert" color="error" icon="$error" text="Invalid email/password"></v-alert>
         <div>
             <v-card class="pa-5 elevation-2">
                 <h2 class="pb-2">Login to Your Account</h2>
-                <form @submit.prevent="login">
+                <form @submit.prevent="login" id="login-form">
                     <div class="form">
-                        <label >Email</label>
+                        <p >Email</p>
                         <input v-model="email" type="text" required/>
                     </div>
                     <div class="form">
-                        <label for="password">Password</label>
+                        <p>Password</p>
                         <input v-model="password" type="password" required/>
                     </div>
                     <div class="form pt-3">

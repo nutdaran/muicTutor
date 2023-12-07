@@ -3,6 +3,7 @@
     import { computed, onMounted, ref } from 'vue';
     import { db } from '@/firebase/firebase.js'
     import { collection, query, where, getDocs, getDoc, doc } from 'firebase/firestore'
+    import NavBar from '@/components/NavBar.vue'
 
     const props = defineProps({
     id: { required: true }
@@ -43,6 +44,7 @@
 </script>
 
 <template>
+    <NavBar/>
     <main>
         <h2>Tutor Info</h2>
         <div v-if="tutor.name" class="bio"> <!--Check if the data is defined-->

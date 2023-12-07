@@ -1,9 +1,11 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { RouterLink } from 'vue-router';
-import { db } from '@/firebase/firebase.js'
+import { db,auth } from '@/firebase/firebase.js'
 import { doc, updateDoc, arrayUnion, increment, arrayRemove, getDoc } from 'firebase/firestore'
 
+    const currentUser = auth.currentUser
+    const username = ref(null)
     const course  = defineProps({
         course: {
             type: Object,
@@ -11,20 +13,37 @@ import { doc, updateDoc, arrayUnion, increment, arrayRemove, getDoc } from 'fire
         }
     })
 
-    const checkName = computed (() => {
-        return course.course.studentList.includes("F");
+    onMounted(async () => {
+        console.log("Fetching database...")
+        await getUsername()
+        console.log("Done")
     })
 
+    const getUsername = async () => {
+      const snapshot = await getDoc(doc(db,"users",currentUser.uid))
+      if (snapshot.exists()) {
+          username.value = snapshot.data().username
+          console.log("username:"+username.value)
+      } else {
+          console.log('Can not find this user')
+      }
+  }
+
+    const checkName = computed (() => {
+        return course.course.studentList.includes(username.value);
+    })
+
+    // add student into the course + add course into student
     const enrollCourse = async function (id) {
       const courseDocRef = doc(db, "course", id);
       const courseSnapshot = await getDoc(courseDocRef);
 
       if (courseSnapshot.exists()) {
         const studentList = courseSnapshot.data().studentList || [];
-        if (!studentList.includes('F')) { //change to username
+        if (!studentList.includes(username.value)) { //change to username
           await updateDoc(courseDocRef, {
               enrolled: increment(1),
-              studentList: arrayUnion("F")
+              studentList: arrayUnion(username.value)
           })
           alert("Added Course");
           window.location.reload()
@@ -40,10 +59,10 @@ import { doc, updateDoc, arrayUnion, increment, arrayRemove, getDoc } from 'fire
 
       if (courseSnapshot.exists()) {
         const studentList = courseSnapshot.data().studentList || [];
-        if (studentList.includes('F')) {
+        if (studentList.includes(username.value)) {
           await updateDoc(doc(db, "course", id), {
               enrolled: increment(-1),
-              studentList: arrayRemove("F")
+              studentList: arrayRemove(username.value)
           })
           alert("Removed Course");
           window.location.reload()

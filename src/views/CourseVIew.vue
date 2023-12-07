@@ -3,6 +3,8 @@
     import { collection, query, where, getDocs } from 'firebase/firestore'
     import { onMounted, ref } from 'vue';
     import CourseCard  from '@/components/CourseCard.vue'
+    import NavBar from '@/components/NavBar.vue'
+
 
     const props = defineProps({
     id: { required: true }
@@ -28,6 +30,7 @@
 </script>
 
 <template>
+    <NavBar/>
     <main>
         <div class="course">
             <h2>Course</h2>

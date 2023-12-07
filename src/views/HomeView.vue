@@ -1,4 +1,5 @@
 <template>
+  <NavBar/>
   <ImageSlider />
   <div>
       <div class = "factbox">
@@ -76,6 +77,7 @@ import { ref, onMounted } from 'vue';
 import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '@/firebase/firebase.js'
 import SubjectCard from '../components/SubjectCard.vue';
+import NavBar from '@/components/NavBar.vue'
 
 const numOfStudent = ref(42);
 const numOfCourses = ref(12);
@@ -125,6 +127,7 @@ async function getCourses() {
 onMounted(async () => {
     console.log("Connecting to Firebase")
     await getCourses()
+    console.log("Done")
 })
 
 </script>
