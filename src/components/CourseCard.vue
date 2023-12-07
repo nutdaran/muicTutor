@@ -37,6 +37,7 @@ import { doc, updateDoc, arrayUnion, increment, arrayRemove, getDoc } from 'fire
     const enrollCourse = async function (id) {
       const courseDocRef = doc(db, "course", id);
       const courseSnapshot = await getDoc(courseDocRef);
+      const userDocRef = doc(db,"users", currentUser.uid);
 
       if (courseSnapshot.exists()) {
         const studentList = courseSnapshot.data().studentList || [];
@@ -44,6 +45,9 @@ import { doc, updateDoc, arrayUnion, increment, arrayRemove, getDoc } from 'fire
           await updateDoc(courseDocRef, {
               enrolled: increment(1),
               studentList: arrayUnion(username.value)
+          })
+          await updateDoc(userDocRef, {
+              course: arrayUnion(courseSnapshot.data().id)
           })
           alert("Added Course");
           window.location.reload()
@@ -56,6 +60,7 @@ import { doc, updateDoc, arrayUnion, increment, arrayRemove, getDoc } from 'fire
     const leaveCourse = async function (id) {
       const courseDocRef = doc(db, "course", id);
       const courseSnapshot = await getDoc(courseDocRef);
+      const userDocRef = doc(db,"users", currentUser.uid);
 
       if (courseSnapshot.exists()) {
         const studentList = courseSnapshot.data().studentList || [];
@@ -63,6 +68,9 @@ import { doc, updateDoc, arrayUnion, increment, arrayRemove, getDoc } from 'fire
           await updateDoc(doc(db, "course", id), {
               enrolled: increment(-1),
               studentList: arrayRemove(username.value)
+          })
+          await updateDoc(userDocRef, {
+              course: arrayRemove(courseSnapshot.data().id)
           })
           alert("Removed Course");
           window.location.reload()
