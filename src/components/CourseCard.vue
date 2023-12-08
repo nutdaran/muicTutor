@@ -4,43 +4,47 @@ import { RouterLink } from 'vue-router';
 import { db,auth } from '@/firebase/firebase.js'
 import { doc, updateDoc, arrayUnion, increment, arrayRemove, getDoc } from 'firebase/firestore'
 
-    const currentUser = auth.currentUser
-    const username = ref(null)
-    const course  = defineProps({
-        course: {
-            type: Object,
-            required: true
-        }
-    })
+  const currentUser = auth.currentUser
+  const username = ref(null)
+  const course  = defineProps({
+      course: {
+          type: Object,
+          required: true
+      }
+  })
 
-    onMounted(async () => {
-        console.log("Fetching database...")
-        await getUsername()
-        console.log("Done")
-    })
+  onMounted(async () => {
+      console.log("Fetching database...")
+      await getUsername()
+      console.log("Done")
+  })
 
-    const getUsername = async () => {
+  const getUsername = async () => {
+    if (currentUser!=null) {
       const snapshot = await getDoc(doc(db,"users",currentUser.uid))
       if (snapshot.exists()) {
           username.value = snapshot.data().username
           console.log("username:"+username.value)
-      } else {
-          console.log('Can not find this user')
       }
-  }
+    } else {
+        console.log('no user log in')
+    }
+}
 
-    const checkName = computed (() => {
-        return course.course.studentList.includes(username.value);
-    })
+  const checkName = computed (() => {
+      return course.course.studentList.includes(username.value);
+  })
 
-    // add student into the course + add course into student
-    const enrollCourse = async function (id) {
+  // add student into the course + add course into student
+  const enrollCourse = async function (id) {
+
+    if (currentUser!=null) {
       const courseDocRef = doc(db, "course", id);
       const courseSnapshot = await getDoc(courseDocRef);
       const userDocRef = doc(db,"users", currentUser.uid);
+      const studentList = courseSnapshot.data().studentList || [];
 
       if (courseSnapshot.exists()) {
-        const studentList = courseSnapshot.data().studentList || [];
         if (!studentList.includes(username.value)) { //change to username
           await updateDoc(courseDocRef, {
               enrolled: increment(1),
@@ -52,33 +56,37 @@ import { doc, updateDoc, arrayUnion, increment, arrayRemove, getDoc } from 'fire
           alert("Added Course");
           window.location.reload()
         }
-      } else {
-        console.log("No such document");
       }
+    } else {
+      // const emit = defineEmits('alert-nouser')
+      // emit('alert-nouser')
+      // this.$emit('alert-nouser')
+      console.log("No such document");
     }
+  }
 
-    const leaveCourse = async function (id) {
-      const courseDocRef = doc(db, "course", id);
-      const courseSnapshot = await getDoc(courseDocRef);
-      const userDocRef = doc(db,"users", currentUser.uid);
+  const leaveCourse = async function (id) {
+    const courseDocRef = doc(db, "course", id);
+    const courseSnapshot = await getDoc(courseDocRef);
+    const userDocRef = doc(db,"users", currentUser.uid);
 
-      if (courseSnapshot.exists()) {
-        const studentList = courseSnapshot.data().studentList || [];
-        if (studentList.includes(username.value)) {
-          await updateDoc(doc(db, "course", id), {
-              enrolled: increment(-1),
-              studentList: arrayRemove(username.value)
-          })
-          await updateDoc(userDocRef, {
-              course: arrayRemove(courseSnapshot.data().id)
-          })
-          alert("Removed Course");
-          window.location.reload()
-        }
-      } else {
-        console.log("No such document");
+    if (courseSnapshot.exists()) {
+      const studentList = courseSnapshot.data().studentList || [];
+      if (studentList.includes(username.value)) {
+        await updateDoc(doc(db, "course", id), {
+            enrolled: increment(-1),
+            studentList: arrayRemove(username.value)
+        })
+        await updateDoc(userDocRef, {
+            course: arrayRemove(courseSnapshot.data().id)
+        })
+        alert("Removed Course");
+        // window.location.reload()
       }
+    } else {
+      console.log("No such document");
     }
+  }
 
 </script>
 

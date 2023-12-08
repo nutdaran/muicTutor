@@ -27,10 +27,16 @@
             await getCourses()
             console.log("Done")
     });
+
+    const alert = ref(false)
+    const receivedAlert = (alert) => {
+        alert.value = true
+    }
 </script>
 
 <template>
     <NavBar/>
+    <v-alert class="alert-bar" v-if="alert" color="error" icon="$error" text="Please Log in first"></v-alert>
     <main>
         <div class="course">
             <h2>Course</h2>
@@ -41,6 +47,7 @@
             v-for="course in courses" 
             :key="course.id" 
             :course="course" 
+            @alert-nouser="receivedAlert"
             />
         </div>
     </main>

@@ -22,11 +22,11 @@
     // currentUser.value = auth.currentUser
     if (currentUser != null) {
       console.log("Current user is here" )
+      await getUserDetail()
       // console.log(currentUser)
     } else {
       console.log("No user is logged in!")
     }
-    await getUserDetail()
   })
 
   const logout = () => {
