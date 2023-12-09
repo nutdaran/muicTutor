@@ -59,7 +59,6 @@
         <SubjectCard v-for="subject in subjects" :key="subject" :subject="subject" />
       </div>
     </main>
-    <PieChart :subjects="subjects" />
       <div class="welcomebox">
         <div class="img1"><img :src="t4" alt=""></div>
         <div class = "hellotxt">
@@ -76,10 +75,9 @@ import t4 from '../assets/tutorProfilePictures/t4.jpg';
 import VueNumberAnimation from "vue-number-animation";
 import { ref, onMounted } from 'vue';
 import { collection, onSnapshot } from 'firebase/firestore';
-import { auth, db } from '@/firebase/firebase.js'
+import { db } from '@/firebase/firebase.js'
 import SubjectCard from '../components/SubjectCard.vue';
 import NavBar from '@/components/NavBar.vue'
-import PieChart from '../components/PieChart.vue';
 
 const numOfStudent = ref(42);
 const numOfCourses = ref(12);
@@ -127,12 +125,6 @@ async function getCourses() {
 }
 
 onMounted(async () => {
-    const currentUser = auth.currentUser
-    if (currentUser != null) {
-        console.log("Current user is here" )
-    } else {
-        console.log("No user is logged in!")
-    }
     console.log("Connecting to Firebase")
     await getCourses()
     console.log("Done")

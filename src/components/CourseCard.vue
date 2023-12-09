@@ -56,8 +56,9 @@ import { useRouter } from 'vue-router'; // import useRoute and useRouter
               course: arrayUnion(courseSnapshot.data().id)
           }) 
           alert("Added Course id: "+id+" course name: "+courseName+" to user "+username.value+"");
-          window.location.reload(courseName)
-          router.push({ name: 'course', params: { id: courseName } });
+          router.push({ name: 'dashboard' });
+          // window.location.reload()
+          // router.push({ name: 'course', params: { id: courseName } });
         }
       }
     } else {
@@ -82,8 +83,7 @@ import { useRouter } from 'vue-router'; // import useRoute and useRouter
             course: arrayRemove(courseSnapshot.data().id)
         })
         alert("Removed Course id: "+id+" course name: "+courseName+" to user "+username.value+"");
-          window.location.reload(courseName)
-          router.push({ name: 'course', params: { id: courseName } });
+        window.location.reload()
       }
     } else {
       console.log("No such document");
