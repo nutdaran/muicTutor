@@ -64,12 +64,12 @@
 
 <style>
   #title {
-    font-family: "RubikBold";
+    font-family: "Rubik-Bold";
     font-size: 24px;
     color: white;
   }
   #text-button {
-    font-family: "Rubik";
+    font-family: "Rubik-Regular";
     font-size: 14px;
     color: white;
     border-radius: 12px;

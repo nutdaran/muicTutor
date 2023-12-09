@@ -1,33 +1,33 @@
 h1 {
-  font-family: 'RubikBold';
+  font-family: 'Rubik-Bold';
 }
 
 h2 {
-  font-family: 'RubikBold';
+  font-family: 'Rubik-Bold';
 }
 
 h3 {
-  font-family: 'RubikBold';
+  font-family: 'Rubik-Bold';
 }
 
 p {
-  font-family: 'Rubik';
+  font-family: 'Rubik-Regular';
 }
 
 @font-face {
-  font-family: 'RubikBold';
+  font-family: 'Rubik-Bold';
   src: url(./fonts/Rubik-Bold.ttf);
 }
 
 @font-face {
-  font-family: 'Rubik';
+  font-family: 'Rubik-Regular';
   src: url(./fonts/Rubik-Regular.ttf);
 }
 
 #main-button {
   background-color: #522a80;
   color: white;
-  font-family: "Rubik";
+  font-family: "Rubik-Regular";
   font-size: 14px;
   border-radius: 6px;
   margin-top: auto; 
@@ -36,7 +36,7 @@ p {
 #clicked-button {
   background-color: #8c71a8;
   color: white;
-  font-family: "Rubik";
+  font-family: "Rubik-Regular";
   font-size: 14px;
   border-radius: 6px;
   margin-top: auto; 

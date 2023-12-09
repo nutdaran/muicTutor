@@ -58,10 +58,8 @@ import { doc, updateDoc, arrayUnion, increment, arrayRemove, getDoc } from 'fire
         }
       }
     } else {
-      // const emit = defineEmits('alert-nouser')
-      // emit('alert-nouser')
-      // this.$emit('alert-nouser')
       console.log("No such document");
+      alert("Please log in first")
     }
   }
 
