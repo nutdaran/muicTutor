@@ -1,10 +1,9 @@
 <script setup>
-    import { db } from '@/firebase/firebase.js'
+    import { auth,db } from '@/firebase/firebase.js'
     import { collection, query, where, getDocs } from 'firebase/firestore'
     import { onMounted, ref } from 'vue';
     import CourseCard  from '@/components/CourseCard.vue'
     import NavBar from '@/components/NavBar.vue'
-
 
     const props = defineProps({
     id: { required: true }
@@ -13,7 +12,6 @@
     const courses = ref([])
     async function getCourses() {
         const q = query(collection(db, "course"), where("courseName", "==", props.id));
-
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
         courses.value.push(doc.data())
@@ -22,10 +20,16 @@
     }
 
     onMounted(async () => {
-            window.scrollTo(0, 0)
-            console.log("Fetching database...")
-            await getCourses()
-            console.log("Done")
+        const currentUser = auth.currentUser
+        if (currentUser != null) {
+            console.log("Current user is here" )
+        } else {
+            console.log("No user is logged in!")
+        }
+        window.scrollTo(0, 0)
+        console.log("Fetching database...")
+        await getCourses()
+        console.log("Done")
     });
 
     const alert = ref(false)

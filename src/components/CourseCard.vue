@@ -3,7 +3,9 @@ import { computed, onMounted, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import { db,auth } from '@/firebase/firebase.js'
 import { doc, updateDoc, arrayUnion, increment, arrayRemove, getDoc } from 'firebase/firestore'
+import { useRouter } from 'vue-router'; // import useRoute and useRouter
 
+  const router = useRouter(); // define router
   const currentUser = auth.currentUser
   const username = ref(null)
   const course  = defineProps({
@@ -43,7 +45,7 @@ import { doc, updateDoc, arrayUnion, increment, arrayRemove, getDoc } from 'fire
       const courseSnapshot = await getDoc(courseDocRef);
       const userDocRef = doc(db,"users", currentUser.uid);
       const studentList = courseSnapshot.data().studentList || [];
-
+      const courseName = courseSnapshot.data().courseName
       if (courseSnapshot.exists()) {
         if (!studentList.includes(username.value)) { //change to username
           await updateDoc(courseDocRef, {
@@ -52,9 +54,10 @@ import { doc, updateDoc, arrayUnion, increment, arrayRemove, getDoc } from 'fire
           })
           await updateDoc(userDocRef, {
               course: arrayUnion(courseSnapshot.data().id)
-          })
-          alert("Added Course");
-          window.location.reload()
+          }) 
+          alert("Added Course id: "+id+" course name: "+courseName+" to user "+username.value+"");
+          window.location.reload(courseName)
+          router.push({ name: 'course', params: { id: courseName } });
         }
       }
     } else {
@@ -67,7 +70,7 @@ import { doc, updateDoc, arrayUnion, increment, arrayRemove, getDoc } from 'fire
     const courseDocRef = doc(db, "course", id);
     const courseSnapshot = await getDoc(courseDocRef);
     const userDocRef = doc(db,"users", currentUser.uid);
-
+    const courseName = courseSnapshot.data().courseName
     if (courseSnapshot.exists()) {
       const studentList = courseSnapshot.data().studentList || [];
       if (studentList.includes(username.value)) {
@@ -78,8 +81,9 @@ import { doc, updateDoc, arrayUnion, increment, arrayRemove, getDoc } from 'fire
         await updateDoc(userDocRef, {
             course: arrayRemove(courseSnapshot.data().id)
         })
-        alert("Removed Course");
-        // window.location.reload()
+        alert("Removed Course id: "+id+" course name: "+courseName+" to user "+username.value+"");
+          window.location.reload(courseName)
+          router.push({ name: 'course', params: { id: courseName } });
       }
     } else {
       console.log("No such document");

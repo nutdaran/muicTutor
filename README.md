@@ -17,6 +17,8 @@ npm install firebase
 npm i vuetify
 npm install vuetify@next @mdi/font
 npm install vue-number-animation
+npm install @canvasjs/vue-charts
+npm install intersection-observer
 npm install
 ```
 

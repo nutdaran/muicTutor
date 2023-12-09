@@ -1,14 +1,14 @@
 <script setup>
   import { auth, db } from '@/firebase/firebase'
-  import { onMounted, ref } from 'vue'
+  import { onBeforeMount, onMounted, ref } from 'vue'
   import { getDoc, doc } from 'firebase/firestore'
 
-  const currentUser = auth.currentUser
+  const currentUser = ref(auth.currentUser)
   const userDetail = ref({})
 
   const getUserDetail = async () => {
-      if(currentUser != null) {
-        const snapshot = await getDoc(doc(db,"users",currentUser.uid))
+      if(currentUser.value != null) {
+        const snapshot = await getDoc(doc(db,"users",currentUser.value.uid))
         if (snapshot.exists()) {
             userDetail.value = snapshot.data()
             // console.log(userDetail.value.username)
@@ -18,16 +18,28 @@
     }
   }
 
-  onMounted(async () => {
-    // currentUser.value = auth.currentUser
-    if (currentUser != null) {
-      console.log("Current user is here" )
+onBeforeMount(() => {
+  auth.onAuthStateChanged(async (user) => {
+    console.log('Authentication state changed:', user)
+    currentUser.value = user
+    console.log('currentUser in onBeforeMount:', currentUser.value)
+
+    if (user != null) {
       await getUserDetail()
-      // console.log(currentUser)
-    } else {
-      console.log("No user is logged in!")
     }
   })
+})
+
+onMounted(async () => {
+  console.log('currentUser in onMounted:', currentUser.value)
+  if (currentUser.value != null) {
+    console.log('Current user is here')
+    await getUserDetail()
+  } else {
+    console.log('No user is logged in!')
+  }
+})
+
 
   const logout = () => {
     auth.signOut()
