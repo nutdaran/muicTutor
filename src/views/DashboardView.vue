@@ -1,6 +1,5 @@
 <template>
     <NavBar/>
-    <v-alert class="alert-bar" v-if="alert" color="error" icon="$error" text="Please Log in first"></v-alert>
     <main>
         <v-btn icon @click="navigateBack">
             <v-icon>mdi-arrow-left</v-icon>
@@ -16,7 +15,6 @@
                         v-for="course in userCourses" 
                         :key="course.id" 
                         :course="course" 
-                        @alert-nouser="receivedAlert"
                         />
                     </div>
                 </div>
@@ -86,11 +84,6 @@
     // Ensure to unsubscribe from the auth state listener when the component is unmounted.
     return () => unsubscribe()
 })
-
-    const alert = ref(false)
-    const receivedAlert = (alert) => {
-        alert.value = true
-    }
 
 </script>
 
