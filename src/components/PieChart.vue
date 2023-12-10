@@ -2,6 +2,12 @@
   // import observeElement from '../plugins/intersectionObserver.js'
   
   export default {
+    props: {
+      data: {
+        type: Array,
+        required: true,
+      },
+    },
       
     data() {
       return {
@@ -9,22 +15,9 @@
           theme: "light2",
           animationEnabled: true,
           title:{
-            text: "Visitors By Channel"
+            text: "Cost by Courses"
           },
-          data: [{
-            type: "pie",
-            indexLabel: "{label} (#percent%)",
-            yValueFormatString: "#,##0",
-            toolTipContent: "<span style='\"'color: {color};'\"'>{label}</span> {y}(#percent%)",
-            dataPoints: [
-              { label: "Organic Traffic", y: 130631, color: "#008000" },
-              { label: "Direct", y: 28874 },
-              { label: "Referral", y: 15467 },
-              { label: "Social", y: 10543 },
-              { label: "Email", y: 5613 },
-              { label: "Others", y: 8492 }
-            ]
-          }]
+          data: this.data
         },
         styleOptions: {
           width: "100%",
@@ -44,6 +37,6 @@
 
 <template>
   <!-- <div v-if="visible"> -->
-    <CanvasJSChart :options="options" :styles="styleOptions"/>
+    <CanvasJSChart :options="options" :data="$data" :styles="styleOptions"/>
   <!-- </div> -->
 </template>                              
