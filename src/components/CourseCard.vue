@@ -3,9 +3,9 @@ import { computed, onMounted, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import { db,auth } from '@/firebase/firebase.js'
 import { doc, updateDoc, arrayUnion, increment, arrayRemove, getDoc } from 'firebase/firestore'
-import { useRouter } from 'vue-router'; // import useRoute and useRouter
+// import { useRouter } from 'vue-router'; // import useRoute and useRouter
 
-  const router = useRouter(); // define router
+  // const router = useRouter(); // define router
   const currentUser = auth.currentUser
   const username = ref(null)
   const course  = defineProps({
@@ -56,8 +56,8 @@ import { useRouter } from 'vue-router'; // import useRoute and useRouter
               course: arrayUnion(courseSnapshot.data().id)
           }) 
           alert("Added Course id: "+id+" course name: "+courseName+" to user "+username.value+"");
-          router.push({ name: 'dashboard' });
-          // window.location.reload()
+          // router.push({ name: 'dashboard' });
+          window.location.reload()
           // router.push({ name: 'course', params: { id: courseName } });
         }
       }
