@@ -20,6 +20,8 @@ npm install vue-number-animation
 npm install @canvasjs/vue-charts
 npm install intersection-observer
 npm install
+npm install -D vitest
+npm install --save-dev jest
 ```
 
 ### Compile and Hot-Reload for Development

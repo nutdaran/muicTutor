@@ -18,5 +18,14 @@ export default defineConfig({
     watch: {
         usePolling: true
     }
-}
+},
+test: {
+  globals: true,
+  environment: 'jsdom',
+  server: {
+    deps: {
+      inline: ['vuetify'],
+    },
+  },
+},
 })
